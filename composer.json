@@ -1,0 +1,12 @@
+{
+  "name": "jrmadsen67/laravel-route-coverage-test",
+  "description": "Route coverage test for Laravel.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jeff Madsen",
+      "email": "jrmadsen67@gmail.com",
+      "homepage": "http://codebyjeff.com"
+    }
+  ]
+}
