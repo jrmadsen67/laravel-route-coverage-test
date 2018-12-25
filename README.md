@@ -23,6 +23,6 @@ In addition, register `CollectCodeCoverage` in the `app\Http\Kernel.php` under t
 
 The `xCoverageTest` has a funny name for a reason - PhpUnit runs tests in alphabetical order. To most easily capture all the test coverage data *first*, keep it named to run last, and in your Feature directory.
 
-Also - the output relies routes having names to give useful data. But sicne you're all smart enough to be using named routes, that won't be an issue for you in any case.
+Also - the output relies on routes having names to give useful data. But since you're all smart enough to be using named routes, that won't be an issue for you in any case.
 
 Happy Testing!
