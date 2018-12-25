@@ -9,6 +9,8 @@ To keep it simple, I have not attempted to use any sort of Laravel package disco
 
 # Usage
 
+Use `composer require jrmadsen67/laravel-route-coverage-test --dev` to composer pull. When you have finished the process outlined below, this can be completely removed.
+
 After pulling in the two files, move each to the corresponding directory in your Laravel application/
 
 `xCoverageTest` => `tests\Feature\xCoverageTest`
