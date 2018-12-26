@@ -4,6 +4,11 @@
   "license": "MIT",
   "authors": [
     {
+      "name": "Adam Albright",
+      "email": "adam@cactuslabs.net",
+      "homepage": "http://cactuslabs.net"
+    },
+        {
       "name": "Jeff Madsen",
       "email": "jrmadsen67@gmail.com",
       "homepage": "http://codebyjeff.com"
