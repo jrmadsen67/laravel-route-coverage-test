@@ -26,3 +26,7 @@ The `xCoverageTest` has a funny name for a reason - PhpUnit runs tests in alphab
 Also - the output relies on routes having names to give useful data. But since you're all smart enough to be using named routes, that won't be an issue for you in any case.
 
 Happy Testing!
+
+----
+
+I prefer you use the Issues section for problems, but if you do need to reach me you can do so at: https://twitter.com/codebyjeff
