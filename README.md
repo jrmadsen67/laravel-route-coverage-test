@@ -17,7 +17,7 @@ After pulling in the two files, move each to the corresponding directory in your
 
 `CollectCodeCoverage` => `app\Http\Middleware\CollectCodeCoverage`
 
-In addition, register `CollectCodeCoverage` in the `app\Http\Kernel.php` under the `$middleware` group. This middeware will only run for tests, so will not have any affect on your production application.
+In addition, register `CollectCodeCoverage` in the `app\Http\Kernel.php` under the `$middleware` group. This middeware will only run for tests, so will not have any effect on your production application.
 
 # VERY IMPORTANT NOTE THAT YOU PROBABLY WON'T READ
 
