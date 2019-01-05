@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Route;
 
 class CollectCodeCoverage {
 
@@ -25,13 +26,26 @@ class CollectCodeCoverage {
         $response = $next($request);
 
         if(app()->runningUnitTests()){
-
             // Record code coverage
             static::$routesTested[] = ['url'    => $request->getRequestUri(),
-                                       'name'   => optional(\Route::getCurrentRoute())->getName() ?? 'unknown',
+                                       'name'   => $this->getRouteName(Route::getCurrentRoute()) ?? 'unknown',
                                        'method' => $request->getMethod(),
             ];
         }
         return $response;
     }
+
+    protected function getRouteName($route){
+
+        if (!empty($route->getName())){
+            return $route->getName();
+        }
+
+        if ($route->getActionName() && $route->getActionName() !== 'Closure'){
+            return $route->getActionName();
+        }
+
+        return $route->getActionName() . ' /' . $route->uri();
+    }
+
 }
