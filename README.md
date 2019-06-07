@@ -9,15 +9,31 @@ To keep it simple, I have not attempted to use any sort of Laravel package disco
 
 # Usage
 
-Use `composer require jrmadsen67/laravel-route-coverage-test --dev` to composer pull. When you have finished the process outlined below, this can be completely removed.
+Install package, When you have finished the process outlined below, this can be completely removed:
+```
+composer require jrmadsen67/laravel-route-coverage-test --dev
+```
 
-After pulling in the two files, move each to the corresponding directory in your Laravel application/
+After pulling in the two files, move each to the corresponding directory in your Laravel application:
+```
+cp vendor/jrmadsen67/laravel-route-coverage-test/src/test/Feature/xCoverageTest.php tests/Feature/
 
-`xCoverageTest` => `tests\Feature\xCoverageTest`
+cp vendor/jrmadsen67/laravel-route-coverage-test/src/app/Http/Middleware/CollectCodeCoverage.php  app/Http/Middleware/
+```
 
-`CollectCodeCoverage` => `app\Http\Middleware\CollectCodeCoverage`
+On Http/Kernel.php, register `CollectCodeCoverage`. This middeware will only run for tests, so will not have any effect on your production application:
+```
+ protected $middleware = [
+       ....
+        Middleware\CollectCodeCoverage::class,
+    ];
+```
 
-In addition, register `CollectCodeCoverage` in the `app\Http\Kernel.php` under the `$middleware` group. This middeware will only run for tests, so will not have any effect on your production application.
+Run yout phpunit:
+```
+vendor/bin/phpunit
+```
+
 
 # VERY IMPORTANT NOTE THAT YOU PROBABLY WON'T READ
 
