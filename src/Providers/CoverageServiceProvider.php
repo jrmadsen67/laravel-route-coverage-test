@@ -4,7 +4,7 @@
  *
  * This provider will publish the required files in the required directories.
  *
- * PHP version 7.2
+ * PHP version 7.0
  *
  * @category Providers
  * @package  laravelRouteCoverageTest
@@ -36,7 +36,7 @@ class CoverageServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function registerPublishableResources(): void
+    private function registerPublishableResources()
     {
         $path = dirname(__DIR__).'/../publishable';
 
@@ -65,11 +65,11 @@ class CoverageServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register configurations and facade(s).
+     * Register publishable files.
      *
      * @return void
      */
-    public function register(): void
+    public function register()
     {
         if ($this->app->runningInConsole()) {
             $this->registerPublishableResources();
@@ -81,8 +81,8 @@ class CoverageServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(): void
+    public function boot(\Illuminate\Routing\Router $router)
     {
-        //
+        $router->middleware('laravel-route-coverage-test', \App\App\Http\Middleware\CollectCodeCoverage::class);
     }
 }

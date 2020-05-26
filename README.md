@@ -21,7 +21,7 @@ cp vendor/jrmadsen67/laravel-route-coverage-test/src/test/Feature/xCoverageTest.
 cp vendor/jrmadsen67/laravel-route-coverage-test/src/app/Http/Middleware/CollectCodeCoverage.php  app/Http/Middleware/
 ```
 
-On Http/Kernel.php, register `CollectCodeCoverage`. This middeware will only run for tests, so will not have any effect on your production application:
+On Http/Kernel.php, register `CollectCodeCoverage`. This middleware will only run for tests, so will not have any effect on your production application:
 ```
  protected $middleware = [
        ....
