@@ -58,6 +58,12 @@ class CoverageServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * Return a path inside the tests folder.
+     *
+     * @param string $path Path inside the tests folder.
+     * @return string
+     */
     protected function tests_path($path)
     {
         $realPath = realpath(app()->path('../tests/'));
@@ -83,6 +89,9 @@ class CoverageServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Routing\Router $router)
     {
-        $router->middleware('laravel-route-coverage-test', \App\App\Http\Middleware\CollectCodeCoverage::class);
+        $router->middleware(
+          'laravel-route-coverage-test',
+          \App\App\Http\Middleware\CollectCodeCoverage::class
+        );
     }
 }
