@@ -1,6 +1,7 @@
 {
   "name": "jrmadsen67/laravel-route-coverage-test",
   "description": "Route coverage test for Laravel.",
+  "version": "1.1",
   "license": "MIT",
   "authors": [
     {
@@ -8,10 +9,27 @@
       "email": "adam@cactuslabs.net",
       "homepage": "http://cactuslabs.net"
     },
-        {
+    {
       "name": "Jeff Madsen",
       "email": "jrmadsen67@gmail.com",
       "homepage": "http://codebyjeff.com"
+    },
+    {
+      "name": "Johnny Mast",
+      "email": "mastjohnny@gmail.com",
+      "homepage": "https://johnnymast.io"
     }
-  ]
+  ],
+  "autoload": {
+    "psr-4": {
+      "jrmadsen67\\LaravelRouteCoverageTest\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "jrmadsen67\\LaravelRouteCoverageTest\\Providers\\CoverageServiceProvider"
+      ]
+    }
+  }
 }
