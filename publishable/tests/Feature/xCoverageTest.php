@@ -14,7 +14,9 @@ use Tests\TestCase;
  * @package Tests\Unit
  */
 class xCoverageTest extends TestCase {
-
+    
+    private $excludeRoute = [];
+    
     public function testCheckAllRoutesTested(){
 
         $routesTested = CollectCodeCoverage::$routesTested;
@@ -26,6 +28,13 @@ class xCoverageTest extends TestCase {
 
             $routeName = $this->getMissingRouteName($route);
             $hits = $list->get($routeName);
+            
+            $isExclude = false;
+            array_walk($this->excludeRoute, function ($excludeName) use ($routeName, &$isExclude) {
+                if ($isExclude) return;
+                $isExclude = Str::is($excludeName, $routeName);
+            });
+            if ($isExclude) continue;
 
             foreach($route->methods() as $method){
 
