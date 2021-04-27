@@ -37,6 +37,10 @@ class CollectCodeCoverage {
 
     protected function getRouteName($route){
 
+        if (empty($route)) {
+            return '';
+        }
+        
         if (!empty($route->getName())){
             return $route->getName();
         }
