@@ -129,6 +129,7 @@ Big project refactor, see the changelog sections for more info.
 -   Refactored shared methods between the middleware and test into a new `ReportHelper` object for testing purposes and centralising of reusable code
 -   Refactored the package middleware to reside instead within the package and its namespace, again so it can be tested and also to not pollute the installed application
 -   Renamed `xCoverageTest` to `zRouteCoverageTest` to better reflect what the test covers
+-   Complete refactor of the readme to best reflect the changes in this update
 
 #### Fixed
 
