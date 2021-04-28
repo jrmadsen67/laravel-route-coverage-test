@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" testdox="true" backupGlobals="false" backupStaticAttributes="false" colors="true" verbose="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+	<coverage cacheDirectory="./test_coverage/cache">
+		<include>
+			<directory suffix=".php">
+				./src
+			</directory>
+			<!--
+			<directory suffix=".php">
+			./publishable
+			</directory>
+			-->
+		</include>
+		<report>
+			<text outputFile="./test_coverage/report.txt" />
+			<clover outputFile="./test_coverage/report.xml" />
+			<html outputDirectory="./test_coverage/html" lowUpperBound="50" highLowerBound="90" />
+		</report>
+	</coverage>
+	<testsuites>
+		<testsuite name="Package Unit">
+			<directory suffix="Test.php">
+				./tests/Unit
+			</directory>
+		</testsuite>
+		<testsuite name="Package Feature">
+			<directory suffix="Test.php">
+				./tests/Feature
+			</directory>
+		</testsuite>
+	</testsuites>
+	<php>
+		<server name="APP_ENV" value="testing" />
+		<server name="APP_DEBUG" value="true" />
+	</php>
+</phpunit>
