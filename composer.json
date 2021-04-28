@@ -1,35 +1,64 @@
 {
-  "name": "jrmadsen67/laravel-route-coverage-test",
-  "description": "Route coverage test for Laravel.",
-  "version": "1.1",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Adam Albright",
-      "email": "adam@cactuslabs.net",
-      "homepage": "http://cactuslabs.net"
+    "name": "jrmadsen67/laravel-route-coverage-test",
+    "description": "Route coverage test for Laravel.",
+    "version": "2.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adam Albright",
+            "email": "adam@cactuslabs.net",
+            "homepage": "http://cactuslabs.net"
+        },
+        {
+            "name": "Jeff Madsen",
+            "email": "jrmadsen67@gmail.com",
+            "homepage": "http://codebyjeff.com"
+        },
+        {
+            "name": "Johnny Mast",
+            "email": "mastjohnny@gmail.com",
+            "homepage": "https://johnnymast.io"
+        },
+        {
+            "name": "Ben T",
+            "email": "git@othyn.com",
+            "homepage": "https://othyn.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^7.0|^8.0"
     },
-    {
-      "name": "Jeff Madsen",
-      "email": "jrmadsen67@gmail.com",
-      "homepage": "http://codebyjeff.com"
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "phpunit/phpunit": "^9.5",
+        "spatie/ray": "^1.22"
     },
-    {
-      "name": "Johnny Mast",
-      "email": "mastjohnny@gmail.com",
-      "homepage": "https://johnnymast.io"
+    "autoload": {
+        "psr-4": {
+            "jrmadsen67\\LaravelRouteCoverageTest\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "jrmadsen67\\LaravelRouteCoverageTest\\Providers\\CoverageServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "fix-style": "vendor/bin/php-cs-fixer fix",
+        "fix-misc": "composer dump-autoload",
+        "test": "XDEBUG_MODE=coverage vendor/bin/phpunit",
+        "testf": "XDEBUG_MODE=coverage vendor/bin/phpunit --filter"
     }
-  ],
-  "autoload": {
-    "psr-4": {
-      "jrmadsen67\\LaravelRouteCoverageTest\\": "src/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "jrmadsen67\\LaravelRouteCoverageTest\\Providers\\CoverageServiceProvider"
-      ]
-    }
-  }
 }
