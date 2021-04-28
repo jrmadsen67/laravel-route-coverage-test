@@ -24,13 +24,13 @@ The `zRouteCoverageTest` has a funny name for a reason - PHPUnit runs tests in a
 
 Via Composer, you can run a `composer require` which will grab the latest version of this repo...
 
-```bash
+```sh
 composer require --dev jrmadsen67/laravel-route-coverage-test
 ```
 
 ...and then...
 
-```bash
+```sh
 php artisan vendor:publish --provider="jrmadsen67\LaravelRouteCoverageTest\Providers\CoverageServiceProvider"
 ```
 
@@ -55,7 +55,7 @@ The following table describes which version of this packagae you will require fo
 
 Run your tests as normal via phpunit, or the default Laravel test suite:
 
-```
+```sh
 $ php artisan test
 
 # OR
