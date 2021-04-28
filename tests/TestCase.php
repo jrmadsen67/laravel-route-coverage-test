@@ -24,11 +24,8 @@ abstract class TestCase extends BaseTestCase
     protected function setupTestingRoutes(): void
     {
         Route::group([
-            'prefix'     => '_named_test',
-            'as'         => 'testing.',
-            'middleware' => [
-                'laravel-route-coverage-test',
-            ],
+            'prefix' => '_named_test',
+            'as'     => 'testing.',
         ], function () {
             Route::name('one')
                 ->get('one', function () {
@@ -42,10 +39,7 @@ abstract class TestCase extends BaseTestCase
         });
 
         Route::group([
-            'prefix'     => '_test',
-            'middleware' => [
-                'laravel-route-coverage-test',
-            ],
+            'prefix' => '_test',
         ], function () {
             Route::get('three', function () {
                 return response()->noContent();

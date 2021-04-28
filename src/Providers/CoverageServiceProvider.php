@@ -2,6 +2,7 @@
 
 namespace jrmadsen67\LaravelRouteCoverageTest\Providers;
 
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use jrmadsen67\LaravelRouteCoverageTest\Http\Middleware\CollectCodeCoverage;
@@ -35,13 +36,9 @@ class CoverageServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        // Register the route middleware
-        $router->aliasMiddleware(
-            'laravel-route-coverage-test',
-            CollectCodeCoverage::class
-        );
-
-        $router->middleware('laravel-route-coverage-test');
+        // Register the middleware globally
+        $kernel = $this->app->make(Kernel::class);
+        $kernel->pushMiddleware(CollectCodeCoverage::class);
 
         // Publishing is only necessary when using the CLI
         if ($this->app->runningInConsole()) {
