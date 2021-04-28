@@ -1,0 +1,40 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  php-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      COMPOSER_NO_INTERACTION: 1
+
+    strategy:
+      matrix:
+        php: [8.0, 7.4]
+        dependency-version: [prefer-lowest, prefer-stable]
+        phpunit: [9.5.2]
+
+    name: PHPUnit-${{ matrix.phpunit }} -- PHP-${{ matrix.php }} -- ${{ matrix.dependency-version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        uses: php-actions/composer@v5
+        with:
+          php_version: ${{ matrix.php }}
+
+      - name: PHPUnit Tests
+        uses: php-actions/phpunit@v2
+        with:
+          version: ${{ matrix.phpunit }}
+          php_version: ${{ matrix.php }}
+          php_extensions: xdebug
