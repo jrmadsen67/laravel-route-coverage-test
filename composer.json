@@ -56,9 +56,13 @@
         }
     },
     "scripts": {
+        "build": "docker-compose build",
+        "shell": "docker-compose run --rm testing /bin/sh",
         "fix-style": "vendor/bin/php-cs-fixer fix",
         "fix-misc": "composer dump-autoload",
-        "test": "XDEBUG_MODE=coverage vendor/bin/phpunit",
-        "testf": "XDEBUG_MODE=coverage vendor/bin/phpunit --filter"
+        "test": "docker-compose run --rm testing vendor/bin/phpunit",
+        "test-filtered": "docker-compose run --rm testing vendor/bin/phpunit --filter",
+        "test-local": "XDEBUG_MODE=coverage vendor/bin/phpunit",
+        "test-local-filtered": "XDEBUG_MODE=coverage vendor/bin/phpunit --filter"
     }
 }

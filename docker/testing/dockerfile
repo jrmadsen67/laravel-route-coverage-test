@@ -1,0 +1,19 @@
+FROM php:8.0-cli-alpine
+
+RUN docker-php-ext-install pdo pdo_mysql
+
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug-3.0.2 \
+    && docker-php-ext-enable xdebug \
+    && apk del $PHPIZE_DEPS \
+    && echo 'xdebug.mode=coverage' >> /usr/local/etc/php/php.ini
+
+RUN curl -fsSL https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && composer global require phpunit/phpunit ^9.3 --no-progress --no-scripts --no-interaction
+
+ENV PATH /root/.composer/vendor/bin:$PATH
+
+WORKDIR /testing
+
+CMD ["phpunit"]

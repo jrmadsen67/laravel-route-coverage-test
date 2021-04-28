@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  testing:
+    container_name: testing
+    build:
+      context: .
+      dockerfile: ./docker/testing/dockerfile
+    restart: "no"
+    volumes:
+      - ./:/testing
