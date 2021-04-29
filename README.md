@@ -134,6 +134,7 @@ Big project refactor, see the changelog sections for more info.
 #### Fixed
 
 -   The middleware now applies itself globally using the latest method of doing so for Laravel versions `>5.5`
+-   Manual version lock in for `spatie/macroable` to `^1.0` to fix composer getting confused about requirement conflicts
 
 #### Removed
 
