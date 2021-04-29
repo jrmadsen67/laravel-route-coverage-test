@@ -1,73 +1,67 @@
 <?php
+
+namespace jrmadsen67\LaravelRouteCoverageTest\Providers;
+
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Routing\Router;
+use Illuminate\Support\ServiceProvider;
+use jrmadsen67\LaravelRouteCoverageTest\Http\Middleware\CollectCodeCoverage;
+
 /**
- * CoverageServiceProvider.php
+ * CoverageServiceProvider.php.
  *
  * This provider will publish the required files in the required directories.
  *
  * PHP version 7.0
  *
  * @category Providers
- * @package  laravelRouteCoverageTest
- * @author   Johnny Mast <mastjohnny@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT
- * @link     https://github.com/jrmadsen67/laravel-route-coverage-test
- * @since    GIT:1.1
- */
-
-namespace jrmadsen67\LaravelRouteCoverageTest\Providers;
-
-use Illuminate\Support\ServiceProvider;
-
-/**
- * Class TrackerServiceProvider
  *
- * @category Providers
- * @package  laravelRouteCoverageTest
  * @author   Johnny Mast <mastjohnny@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
- * @link     https://github.com/jrmadsen67/laravel-route-coverage-test
+ *
+ * @see     https://github.com/jrmadsen67/laravel-route-coverage-test
  * @since    GIT:1.1
  */
 class CoverageServiceProvider extends ServiceProvider
 {
+    /**
+     * Helper for the base directory for all the supplimentary package stuff.
+     */
+    const PACKAGE_RESOURCE_DIR = __DIR__.'/../../publishable';
 
     /**
-     * Register the publishable files.
+     * Tell Laravel where to look for the package it's migrations.
      *
      * @return void
      */
-    private function registerPublishableResources()
+    public function boot(Router $router)
     {
-        $path = dirname(__DIR__).'/../publishable';
+        // Register the middleware globally
+        $kernel = $this->app->make(Kernel::class);
+        $kernel->pushMiddleware(CollectCodeCoverage::class);
 
-        $publishable = [
-          'app' => [
-            "{$path}/app/Http/Middleware/CollectCodeCoverage.php" => app_path(
-              'Http/Middleware/CollectCodeCoverage.php'
-            ),
-          ],
-          'tests' => [
-            "{$path}/tests/Feature/xCoverageTest.php" => $this->tests_path(
-              'Feature/xCoverageTest.php'
-            ),
-          ]
-        ];
-
-        foreach ($publishable as $group => $paths) {
-            $this->publishes($paths, $group);
+        // Publishing is only necessary when using the CLI
+        if ($this->app->runningInConsole()) {
+            $this->bootForConsole();
         }
     }
 
     /**
-     * Return a path inside the tests folder.
+     * Console-specific booting.
      *
-     * @param string $path Path inside the tests folder.
-     * @return string
+     * @return void
      */
-    protected function tests_path($path)
+    protected function bootForConsole()
     {
-        $realPath = realpath(app()->path('../tests/'));
-        return $realPath.'/'.$path;
+        // Publishing the configuration file.
+        $this->publishes([
+            self::PACKAGE_RESOURCE_DIR.'/config/route-coverage.php' => config_path('route-coverage.php'),
+        ], 'config');
+
+        // Publishing the tests.
+        $this->publishes([
+            self::PACKAGE_RESOURCE_DIR.'/tests/Feature/zRouteCoverageTest.php' => tests_path('Feature/zRouteCoverageTest.php'),
+        ], 'tests');
     }
 
     /**
@@ -77,21 +71,9 @@ class CoverageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->runningInConsole()) {
-            $this->registerPublishableResources();
-        }
-    }
-
-    /**
-     * Tell Laravel where to look for the package it's migrations.
-     *
-     * @return void
-     */
-    public function boot(\Illuminate\Routing\Router $router)
-    {
-        $router->middleware(
-          'laravel-route-coverage-test',
-          \App\App\Http\Middleware\CollectCodeCoverage::class
+        $this->mergeConfigFrom(
+            self::PACKAGE_RESOURCE_DIR.'/config/route-coverage.php',
+            'route-coverage'
         );
     }
 }
