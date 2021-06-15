@@ -56,7 +56,8 @@ class RouteHelper
         array_walk(
             $excludedRouteGroups,
             function ($excludeGroupName) use ($routeName, &$isExcluded) {
-                if ($isExcluded = Str::startsWith($routeName, $excludeGroupName.config('route_groups_seperator', '.'))) {
+                $isExcluded = $isExcluded ? $isExcluded : Str::startsWith($routeName, $excludeGroupName.config('route_groups_seperator', '.'));
+                if ($isExcluded) {
                     return;
                 }
             }
